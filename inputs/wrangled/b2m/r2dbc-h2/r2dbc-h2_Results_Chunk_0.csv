@@ -1,0 +1,9 @@
+Project Name,Benchmark Name,Count,Direct Count,Methods,Direct Methods
+r2dbc-h2,io.r2dbc.h2.StagedResultSizeBenchmarks.parametrizedR2dbc,2,2,"io.r2dbc.h2.H2ConnectionConfiguration.builder,io.r2dbc.h2.H2ConnectionFactory.create","io.r2dbc.h2.H2ConnectionConfiguration.builder,io.r2dbc.h2.H2ConnectionFactory.create"
+r2dbc-h2,io.r2dbc.h2.StagedResultSizeBenchmarks.preparedJdbc,0,0,,
+r2dbc-h2,io.r2dbc.h2.StagedResultSizeBenchmarks.simpleJdbc,0,0,,
+r2dbc-h2,io.r2dbc.h2.StagedResultSizeBenchmarks.simpleR2dbc,0,0,,
+r2dbc-h2,io.r2dbc.h2.StatementBenchmarks.parametrizedJdbc,0,0,,
+r2dbc-h2,io.r2dbc.h2.StatementBenchmarks.parametrizedR2dbc,0,0,,
+r2dbc-h2,io.r2dbc.h2.StatementBenchmarks.simpleJdbc,0,0,,
+r2dbc-h2,io.r2dbc.h2.StatementBenchmarks.simpleR2dbc,0,0,,

@@ -1,0 +1,9 @@
+Project Name,Benchmark Name,Count,Direct Count,Methods,Direct Methods
+feign,feign.benchmark.DecoderIteratorsBenchmark.decode,15,12,"feign.benchmark.DecoderIteratorsBenchmark.fetch,feign.jackson.JacksonDecoder.decode,feign.benchmark.DecoderIteratorsBenchmark.carsJson,feign.Util.checkNotNull,feign.Util.checkState,feign.Types.checkNotPrimitive,feign.jackson.JacksonIteratorDecoder.decode,feign.stream.StreamDecoder.decode,feign.Request.create,feign.jackson.JacksonIteratorDecoder.actualIteratorTypeArgument,feign.Response.caseInsensitiveCopyOf,feign.Util.ensureClosed,feign.Response.builder,feign.Response.close,feign.jackson.JacksonIteratorDecoder.create","feign.benchmark.DecoderIteratorsBenchmark.fetch,feign.jackson.JacksonDecoder.decode,feign.benchmark.DecoderIteratorsBenchmark.carsJson,feign.Util.checkNotNull,feign.Util.checkState,feign.Types.checkNotPrimitive,feign.jackson.JacksonIteratorDecoder.decode,feign.stream.StreamDecoder.decode,feign.Request.create,feign.Response.caseInsensitiveCopyOf,feign.Response.builder,feign.jackson.JacksonIteratorDecoder.create"
+feign,feign.benchmark.RealRequestBenchmarks.query_baseCaseUsingOkHttp,0,0,,
+feign,feign.benchmark.RealRequestBenchmarks.query_feignUsingOkHttp,0,0,,
+feign,feign.benchmark.WhatShouldWeCacheBenchmarks.buildAndQuery_fake,0,0,,
+feign,feign.benchmark.WhatShouldWeCacheBenchmarks.buildAndQuery_fake_cachedApi,0,0,,
+feign,feign.benchmark.WhatShouldWeCacheBenchmarks.buildAndQuery_fake_cachedContract,0,0,,
+feign,feign.benchmark.WhatShouldWeCacheBenchmarks.buildAndQuery_fake_cachedFeign,0,0,,
+feign,feign.benchmark.WhatShouldWeCacheBenchmarks.parseFeignContract,0,0,,

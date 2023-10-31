@@ -1,0 +1,20 @@
+Project Name,Total Tests,Methods Tested,Methods Directly Tested
+HdrHistogram,147,4686,512
+SquidLib,73,862,278
+arrow,869,44162,5630
+byte-buddy,6357,19361,4677
+cantaloupe,3063,28944,5560
+client_java,217,1462,464
+commons-bcel,137,4581,153
+fastjson,4979,65302,4984
+feign,913,17876,1920
+imglib2,635,7270,1455
+iri,398,3126,860
+jdbi,1428,68684,5180
+jgrapht,2416,34452,4739
+jooby,485,12474,882
+logbook,564,3677,794
+objenesis,45,136,52
+panda,61,3910,135
+r2dbc-h2,259,613,360
+vert.x,4095,24438,5782

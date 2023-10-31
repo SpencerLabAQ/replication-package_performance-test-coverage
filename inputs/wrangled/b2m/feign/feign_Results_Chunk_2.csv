@@ -1,0 +1,9 @@
+Project Name,Benchmark Name,Count,Direct Count,Methods,Direct Methods
+feign,feign.benchmark.DecoderIteratorsBenchmark.decode,0,0,,
+feign,feign.benchmark.RealRequestBenchmarks.query_baseCaseUsingOkHttp,1,1,feign.benchmark.RealRequestBenchmarks.tearDown,feign.benchmark.RealRequestBenchmarks.tearDown
+feign,feign.benchmark.RealRequestBenchmarks.query_feignUsingOkHttp,19,2,"feign.DeclarativeContract.registerClassAnnotation,feign.Types.checkNotPrimitive,feign.template.Template.parseTemplate,feign.RequestTemplate.header,feign.DeclarativeContract.registerParameterAnnotation,feign.DeclarativeContract.registerMethodAnnotation,feign.MethodMetadata.template,feign.template.Literal.create,feign.DeclarativeContract.parseAndValidateMetadata,feign.DeclarativeContract.processAnnotationOnMethod,feign.template.Template.parseFragment,feign.Feign.configKey,feign.template.HeaderTemplate.create,feign.Feign.builder,feign.RequestTemplate.headers,feign.DeclarativeContract.processAnnotationOnClass,feign.ReflectiveFeign.newInstance,feign.RequestTemplate.appendHeader,feign.template.Template.encodeLiteral","feign.ReflectiveFeign.newInstance,feign.Feign.builder"
+feign,feign.benchmark.WhatShouldWeCacheBenchmarks.buildAndQuery_fake,0,0,,
+feign,feign.benchmark.WhatShouldWeCacheBenchmarks.buildAndQuery_fake_cachedApi,0,0,,
+feign,feign.benchmark.WhatShouldWeCacheBenchmarks.buildAndQuery_fake_cachedContract,0,0,,
+feign,feign.benchmark.WhatShouldWeCacheBenchmarks.buildAndQuery_fake_cachedFeign,0,0,,
+feign,feign.benchmark.WhatShouldWeCacheBenchmarks.parseFeignContract,0,0,,

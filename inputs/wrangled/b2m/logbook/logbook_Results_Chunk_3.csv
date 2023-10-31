@@ -1,0 +1,21 @@
+Project Name,Benchmark Name,Count,Direct Count,Methods,Direct Methods
+logbook,org.zalando.logbook.HeaderBenchmark.autoconfigurationRequest,0,0,,
+logbook,org.zalando.logbook.HeaderBenchmark.autoconfigurationResponse,0,0,,
+logbook,org.zalando.logbook.HeaderBenchmark.replace1xRequest,0,0,,
+logbook,org.zalando.logbook.HeaderBenchmark.replace1xResponse,0,0,,
+logbook,org.zalando.logbook.HeaderBenchmark.replace2xRequest,0,0,,
+logbook,org.zalando.logbook.HeaderBenchmark.replace2xResponse,0,0,,
+logbook,org.zalando.logbook.HeaderBenchmark.replace2xResponseShopify,0,0,,
+logbook,org.zalando.logbook.HttpLogFormatterBenchmark.defaultRequest,0,0,,
+logbook,org.zalando.logbook.HttpLogFormatterBenchmark.defaultResponse,2,1,"org.zalando.logbook.DefaultHttpHeaders.update,org.zalando.logbook.DefaultHttpHeaders.immutableCopy",org.zalando.logbook.DefaultHttpHeaders.update
+logbook,org.zalando.logbook.HttpLogFormatterBenchmark.fastJsonRequest,21,13,"org.zalando.logbook.Fold.fold,org.zalando.logbook.json.FastJsonHttpLogFormatter.format,org.zalando.logbook.HeaderState.defaultSpringSecurityResponseHeaders,org.zalando.logbook.DefaultHttpHeaders.update,org.zalando.logbook.HeaderState.defaultIstioHeaders,org.zalando.logbook.HeaderState.defaultOpenIdConnectHeaders,org.zalando.logbook.RequestURI.reconstruct,org.zalando.logbook.HeaderState.getRequestHeaders,org.zalando.logbook.HeaderFilters.replaceHeaders,org.zalando.logbook.HeaderFilters.authorization,org.zalando.logbook.HeaderState.postRequestHeaders,org.zalando.logbook.DefaultHttpHeaders.immutableCopy,org.zalando.logbook.HeaderState.defaultShopifyResponse,org.zalando.logbook.HeaderFilters.defaultValue,org.zalando.logbook.autoconfigure.LogbookAutoConfiguration.headerFilter,org.zalando.logbook.Fold.throwingCombiner,org.zalando.logbook.DefaultHttpHeaders.delegate,org.zalando.logbook.DefaultFilters.defaultValues,org.zalando.logbook.MockHttpRequest.getBody,org.zalando.logbook.HeaderState.getContentResponseHeaders,org.zalando.logbook.RequestURI.isNotStandardPort","org.zalando.logbook.HeaderState.defaultOpenIdConnectHeaders,org.zalando.logbook.Fold.fold,org.zalando.logbook.HeaderState.defaultShopifyResponse,org.zalando.logbook.autoconfigure.LogbookAutoConfiguration.headerFilter,org.zalando.logbook.json.FastJsonHttpLogFormatter.format,org.zalando.logbook.HeaderState.getRequestHeaders,org.zalando.logbook.HeaderFilters.replaceHeaders,org.zalando.logbook.HeaderFilters.authorization,org.zalando.logbook.HeaderState.defaultSpringSecurityResponseHeaders,org.zalando.logbook.HeaderState.getContentResponseHeaders,org.zalando.logbook.HeaderState.postRequestHeaders,org.zalando.logbook.DefaultHttpHeaders.delegate,org.zalando.logbook.HeaderState.defaultIstioHeaders"
+logbook,org.zalando.logbook.HttpLogFormatterBenchmark.fastJsonResponse,0,0,,
+logbook,org.zalando.logbook.HttpLogFormatterBenchmark.jsonRequest,0,0,,
+logbook,org.zalando.logbook.HttpLogFormatterBenchmark.jsonResponse,0,0,,
+logbook,org.zalando.logbook.LogbookBenchmark.json,0,0,,
+logbook,org.zalando.logbook.LogbookBenchmark.noop,0,0,,
+logbook,org.zalando.logbook.LogbookBenchmark.plain,0,0,,
+logbook,org.zalando.logbook.json.JsonMediaTypeBenchmark.contentType1,0,0,,
+logbook,org.zalando.logbook.json.JsonMediaTypeBenchmark.contentType2,0,0,,
+logbook,org.zalando.logbook.json.JsonMediaTypeBenchmark.contentType3,0,0,,
+logbook,org.zalando.logbook.json.JsonMediaTypeBenchmark.contentType4,0,0,,
