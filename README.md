@@ -59,7 +59,21 @@ Contains generated tables as outputs from the analysis scripts.
 
 2. **Generating Plots and Tables:**
    - Navigate to the `analysis/plots_tables_scripts/` directory.
-   - Run the scripts to generate plots and tables.
+   - Run the scripts to generate plots and tables. Below are the commands to execute each script:
+   ```bash
+   python rq1-fig3.py
+   python rq1-fig4.py
+   python rq1-fig5.py
+   python rq1-table_II.py
+   python rq2-fig6.py
+   python rq2-fig7.py
+   python rq2-fig8.py
+   python rq2-fig9.py
+   python rq3-fig10.py
+   python rq3-fig11.py
+   python rq4-fig12.py
+   python rq4-fig13.py
+   ```
 
 3. **Viewing Results:**
    - Check the `figures/` and `tables/` directories for output figures and tables.
