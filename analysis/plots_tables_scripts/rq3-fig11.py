@@ -8,7 +8,7 @@ warnings.filterwarnings(action='ignore', category=FutureWarning)
 
 
 plots_path = r'../../figures'
-data = pd.read_csv('../../inputs/summaryAlignedDataset.csv')
+data = pd.read_csv('../../inputs/benchmarks/summaryAlignedDataset.csv')
 data["Time"] = data["Time"].astype(float)/3600
 
 # Sort the data in ascending order by the percentage of benchmarked methods

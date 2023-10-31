@@ -7,7 +7,7 @@ import os
 warnings.filterwarnings(action='ignore', category=FutureWarning)
 
 plots_path = r'../../figures'
-data = pd.read_csv('../../inputs/summaryAlignedDataset.csv')
+data = pd.read_csv('../../inputs/benchmarks/summaryAlignedDataset.csv')
 data["Time"] = data["Time"].astype(float)/3600
 
 data_sorted = data.sort_values('Project', ascending=True)

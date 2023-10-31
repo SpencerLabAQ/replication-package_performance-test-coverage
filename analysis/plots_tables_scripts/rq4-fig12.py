@@ -9,8 +9,8 @@ warnings.filterwarnings(action='ignore', category=FutureWarning)
 #Execution Time Comparison
 
 plots_path = r'../../figures'
-time_jmh = pd.read_csv('../../inputs/summaryAlignedDataset.csv')
-time_junit = pd.read_csv('../../inputs/summary.csv')
+time_jmh = pd.read_csv('../../inputs/benchmarks/summaryAlignedDataset.csv')
+time_junit = pd.read_csv('../../inputs/unit_tests/summary.csv')
 
 
 # Load the data
