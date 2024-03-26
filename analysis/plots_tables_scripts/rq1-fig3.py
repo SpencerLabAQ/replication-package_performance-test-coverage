@@ -16,7 +16,7 @@ df_merged_statistics = pd.read_csv(coverage_path)
 # Set the style of the plots
 sns.set(style="whitegrid")
 
-palette = 'viridis'
+palette = 'colorblind'
 plt.figure(figsize=(6.4, 4.8))
 plot = sns.barplot(x="Project Name", y="Coverage Percentage", data=df_merged_statistics, palette=palette).set(xlabel=None)
 plt.ylabel("Benchmark Coverage (%)")
