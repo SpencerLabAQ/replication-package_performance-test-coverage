@@ -13,6 +13,9 @@ plots_path = r'../../figures'
 coverage_path = "../../outputs/coverageJMH.csv"
 df_merged_statistics = pd.read_csv(coverage_path)
 
+#sort the data frame by name of project
+df_merged_statistics = df_merged_statistics.sort_values('Project Name', key=lambda x: x.str.lower(), ascending=True)
+
 # Set the style of the plots
 sns.set(style="whitegrid")
 

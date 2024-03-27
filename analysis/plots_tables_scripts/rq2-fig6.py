@@ -29,7 +29,7 @@ df_melted = df.melt(id_vars='Project Name', value_vars=['JMH Benchmarks', 'JUnit
 
 # Style and palette
 sns.set_style('whitegrid')
-sns.set_palette('dark')
+sns.set_palette('colorblind')
 
 plt.figure(figsize=(6.4, 4.8))
 fig, ax = plt.subplots()

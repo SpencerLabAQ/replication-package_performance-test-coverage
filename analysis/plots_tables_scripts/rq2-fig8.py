@@ -1,37 +1,44 @@
 # %%
 import pandas as pd
-import matplotlib.pyplot as plt
+import numpy as np
 import seaborn as sns
+import matplotlib.pyplot as plt
 import os
 
 # %%
 plots_path = r'../../figures'
 
-# %%
-# Load the data
-overlap_ratios_junit = pd.read_csv(r'../../outputs/coverageJUnit.csv')
-overlap_ratios_benchmark = pd.read_csv(r'../../outputs/coverageJMH.csv')
+# Loading coverage and time data
+shortlisted_projects_JMH = pd.read_csv("../../inputs/projects_list/Projects_Shortlisted-JMH.csv")
+shortlisted_projects_JUnit= pd.read_csv("../../inputs/projects_list/Projects_Shortlisted-JUnit.csv")
 
-# Rename the columns
-overlap_ratios_junit.rename(columns={'Overlap Ratio': 'JUnit Tests'}, inplace=True)
-overlap_ratios_benchmark.rename(columns={'Overlap Ratio': 'JMH Benchmarks'}, inplace=True)
+df = pd.read_csv("../../outputs/coverageJMH.csv")
 
-# Merge and sort the data
-overlap_ratios = pd.merge(overlap_ratios_junit, overlap_ratios_benchmark, on='Project Name')
-overlap_ratios = overlap_ratios.sort_values('Project Name', key=lambda x: x.str.lower(), ascending=True)
+size_data_JMH = df[['Project Name', 'Average Coverage']]
+size_data_JMH = size_data_JMH.rename(columns={'Average Coverage': 'JMH Benchmarks'})
+size_data_JMH = size_data_JMH[size_data_JMH['Project Name'].isin(shortlisted_projects_JMH['Project'])] 
 
-# Melt the DataFrame 
-df_melted = overlap_ratios.melt(id_vars='Project Name', value_vars=['JMH Benchmarks', 'JUnit Tests'])
+df = pd.read_csv("../../outputs/coverageJUnit.csv")
+size_data_JUnit = df[['Project Name', 'Average Coverage']]
+size_data_JUnit = size_data_JUnit.rename(columns={'Average Coverage': 'JUnit Tests'})
+size_data_JUnit = size_data_JUnit[size_data_JUnit['Project Name'].isin(shortlisted_projects_JUnit['Project'])]
+
+#Merging and Sorting Data
+merged_data = pd.merge(size_data_JMH, size_data_JUnit, left_on='Project Name', right_on='Project Name')
+merged_data = merged_data.sort_values('Project Name', key=lambda x: x.str.lower(), ascending=True)
+
+# Melt the data for grouped bar chart
+data_melted = pd.melt(merged_data, id_vars='Project Name', var_name='Coverage Type', value_name='Coverage')
 
 # Style and palette
 sns.set_style('whitegrid')
-sns.set_palette('dark')
+sns.set_palette('colorblind')
 
 plt.figure(figsize=(6.4, 4.8))
 fig, ax = plt.subplots()
-sns.barplot(x='Project Name', y='value', hue='variable', data=df_melted, ax=ax).set(xlabel=None)
+sns.barplot(x='Project Name', y='Coverage', hue='Coverage Type', data=data_melted, ax=ax).set(xlabel=None)
 ax.legend(ncol=2, loc="upper right", frameon=True)
-plt.ylabel('Coverage Overlap Ratio')
+plt.ylabel('Scope')
 
 plt.xticks(rotation=60, ha='right', fontsize=12, rotation_mode='anchor')
 plt.ticklabel_format(style='plain', useOffset=False, axis='y')
@@ -41,7 +48,7 @@ plt.ticklabel_format(style='plain', useOffset=False, axis='y')
 
 plt.tick_params(axis='x', which='major', pad=-3.5)
 plt.tight_layout()
-plt.savefig(os.path.join(plots_path,'plt_overlapratio_compare_junit_jmh.pdf'), format='pdf',bbox_inches='tight')
+plt.savefig(os.path.join(plots_path,'plt_compare_test_size.pdf'), format='pdf',bbox_inches='tight')
 
 # Show the plot
 plt.show()

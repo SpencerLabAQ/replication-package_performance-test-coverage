@@ -12,10 +12,13 @@ tables_path = r'../../tables'
 
 # Set the style of the plots
 sns.set(style="whitegrid")
-palette = 'viridis'
+palette = 'colorblind'
 
 overlap_ratios_path = "../../outputs/Overlap_Ratios_JMH.csv"
 df_overlap_ratios = pd.read_csv(overlap_ratios_path)
+
+#sort the data frame by name of project
+df_overlap_ratios = df_overlap_ratios.sort_values('Project Name', key=lambda x: x.str.lower(), ascending=True)
 
 # Convert the Overlap Ratio column back to numeric if it's not already
 df_overlap_ratios['Overlap Ratio'] = pd.to_numeric(df_overlap_ratios['Overlap Ratio'])
