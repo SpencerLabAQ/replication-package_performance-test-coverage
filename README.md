@@ -16,8 +16,24 @@ pip install -r requirements.txt
 
 ## Directory Structure and Descriptions
 
-### README.md
 - A comprehensive guide providing all necessary instructions and descriptions to understand and replicate the analyses.
+
+
+### Data Collection Instructions
+In order to collect the callstacks that will be used to determine the coverage of methods, we leverage [async-profiler](https://github.com/async-profiler/async-profiler).
+
+Specifically, given a [self-contained executable JAR of JMH](https://github.com/openjdk/jmh) `benchmarks.jar`, we run the following command to collect the methods invoked by each benchmark:
+
+```
+java -jar benchmarks.jar -bm avgt -wi 0 -i 1 -f 1 -r 100ms -foe false -jvmArgsPrepend "-agentpath:{ASYNC_PROFILER_PATH}/build/libasyncProfiler.so=start,event=cpu,collapsed,cstack=no,include=*jmh*,file=.%t.folded,interval=1"
+``````
+
+Similarly, for JUnit we run:
+
+```
+mvn test -DargLine="-agentpath:{ASYNC_PROFILER_PATH}/build/libasyncProfiler.so=start,event=cpu,collapsed,cstack=no,include=*junit*,file=.%t.folded,interval=1"
+```
+
 
 ### analysis/
 Scripts in this directory perform overlap and test coverages analysis.
