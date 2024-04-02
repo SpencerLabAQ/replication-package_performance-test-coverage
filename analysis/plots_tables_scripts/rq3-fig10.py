@@ -6,6 +6,8 @@ import warnings
 import os
 warnings.filterwarnings(action='ignore', category=FutureWarning)
 
+#Used in the Paper
+#Plotting JMH average execution time
 
 plots_path = r'../../figures'
 data = pd.read_csv('../../inputs/benchmarks/summaryAlignedDataset.csv')
