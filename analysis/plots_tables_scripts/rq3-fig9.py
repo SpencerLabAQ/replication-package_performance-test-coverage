@@ -6,6 +6,9 @@ import warnings
 import os
 warnings.filterwarnings(action='ignore', category=FutureWarning)
 
+#Used in the Paper
+#Plotting JMH total execution time
+
 plots_path = r'../../figures'
 data = pd.read_csv('../../inputs/benchmarks/summaryAlignedDataset.csv')
 data["Time"] = data["Time"].astype(float)/3600
