@@ -26,6 +26,13 @@ def get_direct_calls_set(input_array, in_set):
     return output_set
 
 
+def combine_csv_files(csvs_path, output_path):
+    extension = 'csv'
+    all_filenames = [os.path.join(csvs_path, f) for f in glob.glob(os.path.join(csvs_path, f'*.{extension}'))]
+    combined_csv = pd.concat([pd.read_csv(f) for f in all_filenames])
+    combined_csv.to_csv(output_path, index=False, encoding='utf-8-sig')
+    return output_path
+
 # %%
 def create_method_dictionaries(aggregated_df):
     # Convert DataFrame to Dictionary for faster iteration
@@ -214,7 +221,7 @@ if __name__ == "__main__":
     parser.add_argument('--output_folder_m2b', type=str, required=True,
                         help='Output directory to store Method to Benchmark analysis results.')
     parser.add_argument('--benchmarks_csv_path', type=str, required=True,
-                        help='Path to the benchmarks CSV file, typically used for filtering and analysis.')
+                        help='Path to the list of benchmarks CSV file')
     parser.add_argument('--methods_csv_path', type=str, required=True,
                         help='Path to the methods CSV file from the 0B_Methods_to_CSV script, listing methods to analyze.')
     parser.add_argument('--shortlisted_projects_csv', type=str, required=True,
@@ -239,83 +246,36 @@ if __name__ == "__main__":
         # Process each project using the truncated chunks
         process_project(project, benchmark_df, method_df, args.truncated_csvs_path, output_path_b2m)
 
+    # Iterate over projects for aggregation and analysis
+    for project in project_names:
+        print(f"Aggregating and analyzing data for project: {project}")
+        aggregated_df = aggregate_output(project, args.output_folder_b2m)
+        methods_dict, direct_methods_dict = create_method_dictionaries(aggregated_df)
+        project_methods = method_df[method_df['project_name'] == project]['method']
+        methods_set = set(project_methods.values)
+        methods_to_benchmarks_analysis(project, methods_set, methods_dict, direct_methods_dict, args.output_folder_m2b)
+    
+    # Combine and summarize CSVs for Method to Benchmark and Benchmark to Method analyses
+    combined_methods_to_bench_csv = os.path.join(args.output_folder_m2b, "00_combined_methods_to_bench.csv")
+    combine_csv_files(args.output_folder_m2b, combined_methods_to_bench_csv)
+    
+    combined_bench_to_methods_csv = os.path.join(args.output_folder_b2m, "00_combined_bench_to_methods.csv")
+    combine_csv_files(args.output_folder_b2m, combined_bench_to_methods_csv)
+    
+    # Creating summary CSVs
+    # This part assumes you have the required data loaded into 'df' for each summary
+    # Replace 'df' with actual DataFrame loading lines if needed
+    df_methods_to_bench = pd.read_csv(combined_methods_to_bench_csv)
+    df_bench_to_methods = pd.read_csv(combined_bench_to_methods_csv)
 
-# %%
-#Aggregating the Outputs of for each project, Aggregating the Processed Chunks produced in previous step into one Final File for each project
-#Also creating the Method to Benchmark Analysis for each project
-
-#Aggregating the outputs
-for project in project_names:
-    #Aggregate the output store it in a CSV and get the Aggregated DF
-    aggregated_df = aggregate_output(project, output_folder)
-
-    #Create the Method Dictionaries from the Aggregated DF to be used in the Method to Benchmark Analysis
-    methods_dict, direct_methods_dict = create_method_dictionaries(aggregated_df)
-
-    # Filter method dataframe for the given project name
-    project_methods = method_df[method_df['project_name'] == project]['method']
-    methods_set = set(project_methods.values)
-
-    #Using the Method Dictionaries and the Methods Set, create the Method to Benchmark Analysis and store it in a CSV
-    create_directory_if_not_exists(output_folder2)
-    result_df = methods_to_benchmarks_analysis(project, methods_set, methods_dict, direct_methods_dict, output_folder2)
-
-# %%
-import myLibs.helpers as helpers
-import os
-import pandas as pd
-
-output_folder = r"D:\Sync\PhD\Outputs\Results\Chunk_Results_FINAL-NEW\B2M"
-output_folder2 = r"D:\Sync\PhD\Outputs\Results\Chunk_Results_FINAL-NEW\M2B"
-
-# %%
-#Combine Methods to Bench CSVs
-helpers.combine_csv_files(output_folder2,os.path.join(output_folder2,"00_combined_methods_to_bench.csv"))
-#Combine Bench to Method CSVs
-helpers.combine_csv_files(output_folder,os.path.join(output_folder,"00_combined_bench_to_methods.csv"))
-
-# %%
-#Creating Summary CSV for Method to Benchmarks
-
-# Read the Combined CSV file
-df = pd.read_csv(os.path.join(output_folder2, "00_combined_methods_to_bench.csv"))
-
-# Group by project name and calculate aggregations
-agg_df = df.groupby(['Project Name']).agg({
-    'Method': 'size',  # Count of methods
-    'is_Benchmarked': 'sum',
-    'is_Directly_Benchmarked': 'sum',
-    'Benchmark_Count': 'sum',
-    'Direct_Benchmark_Count': 'sum'
-}).reset_index()
-
-# Rename the Columns
-agg_df.rename(columns={'Method': 'Methods', 'is_Benchmarked':'Benchmarked','is_Directly_Benchmarked':'Directly Benchmarked','Benchmark_Count':'Benchmark By','Direct_Benchmark_Count':'Directly Benchmarked By'}, inplace=True)
-# agg_df['Project Name'] = agg_df['Project Name'].str.lower()  # Convert to lowercase
-agg_df = agg_df.sort_values(by='Project Name').reset_index(drop=True)  # Sort by project name
-
-# Save the resulting aggregated DataFrame
-agg_df.to_csv(os.path.join(output_folder2, "00_combined_methods_to_bench_summary.csv"), index=False)
-
-# %%
-#Creating Summary CSV for Benchmarks to Methods
-
-# Read the Combined CSV file
-df = pd.read_csv(os.path.join(output_folder, "00_combined_bench_to_methods.csv"))
-
-# Group by project name and calculate aggregations
-agg_df = df.groupby(['Project Name']).agg({
-    'Benchmark Name': 'size',  # Count of Benchmarks
-    'Count': 'sum',
-    'Direct Count': 'sum'
-}).reset_index()
-
-# Rename the Columns
-agg_df.rename(columns={'Benchmark Name': 'Total Benchmarks', 'Count':'Methods Benchmarked','Direct Count':'Methods Directly Benchmarked'}, inplace=True)
-# agg_df['Project Name'] = agg_df['Project Name'].str.lower()  # Convert to lowercase
-agg_df = agg_df.sort_values(by='Project Name').reset_index(drop=True)
-
-# Save the resulting aggregated DataFrame
-agg_df.to_csv(os.path.join(output_folder, "00_combined_bench_to_methods_summary.csv"), index=False)
-
-
+    # Summarizing Method to Benchmarks
+    summary_methods_to_bench = df_methods_to_bench.groupby('Project Name').agg({
+        'Method': 'size', 'is_Benchmarked': 'sum', 'is_Directly_Benchmarked': 'sum', 'Benchmark_Count': 'sum', 'Direct_Benchmark_Count': 'sum'
+    }).reset_index()
+    summary_methods_to_bench.to_csv(os.path.join(args.output_folder_m2b, "00_combined_methods_to_bench_summary.csv"), index=False)
+    
+    # Summarizing Benchmarks to Methods
+    summary_bench_to_methods = df_bench_to_methods.groupby('Project Name').agg({
+        'Benchmark Name': 'size', 'Count': 'sum', 'Direct Count': 'sum'
+    }).reset_index()
+    summary_bench_to_methods.to_csv(os.path.join(args.output_folder_b2m, "00_combined_bench_to_methods_summary.csv"), index=False)
