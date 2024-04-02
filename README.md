@@ -33,7 +33,26 @@ Similarly, for JUnit we run:
 ```
 mvn test -DargLine="-agentpath:{ASYNC_PROFILER_PATH}/build/libasyncProfiler.so=start,event=cpu,collapsed,cstack=no,include=*junit*,file=.%t.folded,interval=1"
 ```
+### Collecting Methods
+To  extract the list of Java method signatures that appear in the projects, we used [srcML toolkit](https://www.srcml.org/). We extracted all the Java files and converted them to srcML format using the script `0A_Java_FileExtraction_srcMLCoversion.py`. To run the `0A_Java_FileExtraction_srcMLConversion.py` script, specify three command-line arguments:
+1. `--source_projects_path`: The path to the directory containing the source projects from which Java files will be extracted.
+2. `--extraction_dir`: The path to the directory where all extracted Java files will be stored temporarily.
+3. `--srcml_dir`: The path to the directory where the srcML files for all projects will be generated.
+4. `--csv_target_path`: The path to store the csv for list of Java method signatures
 
+The `0A_Java_FileExtraction_srcMLConversion.py` can be run as:
+
+```
+python 0A_Java_FileExtraction_srcMLConversion.py --source_projects_path "/path/to/source/projects" --extraction_dir "/path/to/extraction/dir" --srcml_dir "/path/to/srcml/dir"
+```
+
+The generated srcML files can be used to extract the list of Java method signatures using `0B_Methods_to_CSV.py`. It can be run as:
+```
+python 0B_Methods_to_CSV.py --srcml_dir "/path/to/srcml/files" --csv_target_path "/path/to/csv/output"
+```
+
+### Preprocessing the Call Stacks
+The call stack preprocessing details come here....
 
 ### analysis/
 Scripts in this directory perform overlap and test coverages analysis.
