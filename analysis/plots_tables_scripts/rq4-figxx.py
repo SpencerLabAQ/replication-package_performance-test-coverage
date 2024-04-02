@@ -8,7 +8,7 @@ warnings.filterwarnings(action='ignore', category=FutureWarning)
 
 
 #JUNIT Total Execution Time
-data = pd.read_csv('../../inputs/Summary.csv', sep = ';', decimal=",")
+data = pd.read_csv('../../inputs/Summary.csv', sep = ',', decimal=".")
 data["Time"] = data["Time"].astype(float)
 
 data_sorted = data.sort_values('Project', ascending=True)

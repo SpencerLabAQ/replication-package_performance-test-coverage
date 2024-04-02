@@ -6,7 +6,7 @@ import warnings
 import os
 warnings.filterwarnings(action='ignore', category=FutureWarning)
 
-data = pd.read_csv('../../inputs/Summary.csv', sep = ';', decimal=",")
+data = pd.read_csv('../../inputs/Summary.csv', sep = ',', decimal=".")
 #JUNIT Average Execution Time
 
 data["Average_Time"] = data["Average_Time"].astype(float)
