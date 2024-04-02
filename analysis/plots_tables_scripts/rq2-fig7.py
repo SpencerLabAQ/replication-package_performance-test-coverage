@@ -5,6 +5,10 @@ import seaborn as sns
 import os
 
 # %%
+#Used in the Paper
+#Plotting JMH vs. JUnit Direct Coverage Graph
+
+# %%
 plots_path = r'../../figures'
 tables_path = r'../../tables'
 
