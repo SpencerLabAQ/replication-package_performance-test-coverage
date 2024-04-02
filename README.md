@@ -52,7 +52,22 @@ python 0B_Methods_to_CSV.py --srcml_dir "/path/to/srcml/files" --csv_target_path
 ```
 
 ### Preprocessing the Call Stacks
-The call stack preprocessing details come here....
+The collected call stacks are preprocessed using the following scripts. Run these scripts in sequence to generate the preprocessed data for further analysis.
+
+1. `0C_Folded_to_Chunks.py`: splits folded files into specified chunk sizes and processes them into CSV format. This script uses the following command-line arguments:
+```
+python 0C_Folded_to_Chunks.py --folded_input_directory "/path/to/folded/files" --shorlisted_projects_csv "/path/to/projects_list.csv" --output_directory "/path/to/output/chunks" --chunk_size 20000
+```
+2. `0D_Chunks_Truncated.py`: filters and truncates the processed chunks to focus on relevant call stacks. Use the following command-line arguments to run this script:
+
+```
+python 0D_Chunks_Truncated.py --chunks_directory "/path/to/processed/chunks" --benchmarks_csv_path "/path/to/benchmarks.csv" --shortlisted_projects_csv "/path/to/projects_list.csv"
+```
+3. `0E_Chunks_Analysed.py`: analyzes the preprocessed chunks for coverage of methods by the benchmarks. Use the following command-line arguments to run this script:
+
+```
+python 0E_Chunks_Analysed.py --truncated_csvs_path "/path/to/truncated/csvs" --output_folder_b2m "/path/to/output/benchmark_to_method" --output_folder_m2b "/path/to/output/method_to_benchmark" --benchmarks_csv_path "/path/to/benchmarks.csv" --methods_csv_path "/path/to/methods.csv" --shortlisted_projects_csv "/path/to/shortlisted/projects.csv"
+```
 
 ### analysis/
 Scripts in this directory perform overlap and test coverages analysis.
