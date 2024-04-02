@@ -6,6 +6,10 @@ import matplotlib.pyplot as plt
 import os
 
 # %%
+#Used in the Paper
+#Plotting Scope (𝑆𝑇) of JMH Benchmarks vs. JUnit Tests
+
+# %%
 plots_path = r'../../figures'
 
 # Loading coverage and time data
