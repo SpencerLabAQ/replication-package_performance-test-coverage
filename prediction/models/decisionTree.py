@@ -4,9 +4,9 @@ from sklearn.tree import DecisionTreeClassifier
 from utils import results
 
 
-def DT(X, y, X_train, X_test, y_train, criterion,  max_depth, max_features, min_samples_leaf, random_state):
+def DT(hyperparameters, X_train, X_test, y_train, criterion,  max_depth, max_features, min_samples_leaf, random_state):
 
-    if(max_depth==None or max_features==None):
+    if(hyperparameters==False):
         classifier = DecisionTreeClassifier(random_state=random_state)#, class_weight='balanced'
 
     else:

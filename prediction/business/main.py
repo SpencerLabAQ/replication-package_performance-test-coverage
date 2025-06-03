@@ -2,6 +2,9 @@ from models import neuralNet, decisionTree, linearRegression, linearDiscriminant
 import pandas as pd
 import numpy as np
 
+from utils import shapCalculator
+
+
 def dataLoadingPandas(dataset, columns):
 
     if(dataset == 'data/metrics_combined_all-05-12-2023.csv'):
@@ -44,9 +47,9 @@ def dataLoadingPandas(dataset, columns):
     print(Y_Data.value_counts())
     print(Y_Data.unique())
 
-    return X_Data, Y_Data
+    return X_Data, Y_Data, df
 
-def predict(X,y, model, hyperparameters, X_train, X_test, y_train, y_test, random_state):
+def predict(model, hyperparameters, X_train, X_test, y_train, y_test, random_state, SHAP):
 
     print("#############")
     print("#############")
@@ -71,7 +74,7 @@ def predict(X,y, model, hyperparameters, X_train, X_test, y_train, y_test, rando
             max_depth = None
             max_features = None
             min_samples_leaf = None
-        y_predictions, y_predictions_proba, classifier = decisionTree.DT(X,y, X_train, X_test, y_train, criterion, max_depth, max_features, min_samples_leaf, random_state)
+        y_predictions, y_predictions_proba, classifier = decisionTree.DT(hyperparameters, X_train, X_test, y_train, criterion, max_depth, max_features, min_samples_leaf, random_state)
 
     if(model=="LR"):
         y_predictions, y_predictions_proba, classifier = linearRegression.LR(X_train, X_test, y_train, random_state)
@@ -99,7 +102,7 @@ def predict(X,y, model, hyperparameters, X_train, X_test, y_train, y_test, rando
             min_sample_leaf = None
             n_estimators = None
 
-        y_predictions, y_predictions_proba, classifier = randomForest.rf(X_train, X_test, y_train, max_depth, n_estimators, max_features, min_sample_leaf, random_state)
+        y_predictions, y_predictions_proba, classifier = randomForest.rf(hyperparameters, X_train, X_test, y_train, max_depth, n_estimators, max_features, min_sample_leaf, random_state)
 
     if(model=="CNB"):
     #Complement Naive Bayesian Network
@@ -138,11 +141,14 @@ def predict(X,y, model, hyperparameters, X_train, X_test, y_train, y_test, rando
             n_neighbors = None
             weights = None
 
-        y_predictions, y_predictions_proba, classifier = kneighbor.kNN(X_train, X_test, y_train, algorithm, leaf_size, metric, n_neighbors, weights)
+        y_predictions, y_predictions_proba, classifier = kneighbor.kNN(hyperparameters, X_train, X_test, y_train, algorithm, leaf_size, metric, n_neighbors, weights)
 
     if(model=="ADA"):
     # ADABoost
     #
         y_predictions, y_predictions_proba, classifier = adaBoost.ada(X_train, X_test, y_train, random_state)
+
+    if(SHAP):
+        shapCalculator.calculateShap(classifier,X_test)
 
     return y_test, y_predictions, y_predictions_proba, model

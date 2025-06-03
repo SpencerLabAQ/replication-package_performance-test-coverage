@@ -1,5 +1,3 @@
-from sklearn.model_selection import KFold
-
 from business import main
 from utils import data_preparation, results, featureSelection
 from pathlib import Path
@@ -42,8 +40,6 @@ autoSpearman = False
 
 ##### RFECV Feature Selection #####
 featureSelectionVar = False
-
-#experiment_name = "nofold-newDataset-Ablation_removedNameLen-OverSampling-noAutospearman" #possbily as a result of append of different parameters
 
 
 ############################# RUN #############################
