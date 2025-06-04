@@ -23,6 +23,8 @@ Inside the folder you will find several scripts:
 -  runnerSamplingAuto.py - this script will run the set of models with sampling and with only the RFECV feature analysis and without hyperparameters
 -  runnerSamplingHyper.py - this script will run the set of models with sampling and  with hyperparameters and without feature analysis
 -  runnerSamplingRFECV.py - this script will run the set of models with sampling and with only the AutoSpearman feature analysis and without hyperparameters
+-  runner5Fold.py - 5 Fold version of the runnerSamplingAuto, in this configuration we are considering the evaluation of the whole set of models without any modification
+-  runnerSHAP.py - this script will run the SHAP analysis for this configuration: Decision Tree, No Sampling, No Feature, No Hyperparameters. You can select a different model to study the features, but consider that elapsed time will change as well as the results.
 
 If needed, the combination of the analysis can be arranged as the reader wishes.
 Inside the generic runner*.py file you can edit the lines from 24 to 50.
